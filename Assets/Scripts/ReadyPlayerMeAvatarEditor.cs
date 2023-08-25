@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using ReadyPlayerMe.AvatarLoader;
 using ReadyPlayerMe.Core;
 using ReadyPlayerMe.Core.Data;
 
