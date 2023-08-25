@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using ReadyPlayerMe.Loader;
 using ReadyPlayerMe.Core;
 using ReadyPlayerMe.Core.Data;
 
@@ -13,6 +14,16 @@ namespace Game.AvatarEditor
         [SerializeField]
         private GameObject canvas;
 
+        [SerializeField]
+        private Transform playerParent;
+
+        [SerializeField]
+        private RuntimeAnimatorController animatorController;
+
+        [SerializeField]
+        private PlayerMovement playerMovementScript;
+
+        [Header("Outputs")]
         public GameObject avatar;
 
         private void Start()
@@ -22,6 +33,8 @@ namespace Game.AvatarEditor
         
         WebInterface.SetupRpmFrame(partner.Subdomain);
 #endif
+
+            //playerMovementScript = PlayerSpawner.instance.GetPlayer().GetComponent<PlayerMovement>();
         }
 
 
@@ -36,7 +49,8 @@ namespace Game.AvatarEditor
 
         private void OnAvatarLoadFailed(object sender, FailureEventArgs args)
         {
-            SDKLogger.Log(TAG, $"Avatar Load failed with error: {args.Message}");
+            Debug.Log("Avatar Load failed with error: " + args.Message);
+            //SDKLogger.Log(TAG, $"Avatar Load failed with error: {args.Message}");
         }
 
         private void OnAvatarLoadCompleted(object sender, CompletionEventArgs args)
@@ -49,12 +63,28 @@ namespace Game.AvatarEditor
                 avatar.transform.position = new Vector3(0, 1, 0);
             }
             */
-            Debug.Log("On Avatar load completed.");
+
+            if (avatar) Destroy(avatar);
+            avatar = args.Avatar;
+            avatar.transform.SetParent(playerParent);
+            //avatar.transform.SetParent(PlayerSpawner.instance.player.transform);
+            avatar.transform.localPosition = new Vector3(0, -1, 0);
+            avatar.transform.rotation = playerParent.rotation;
+            //avatar.transform.rotation = PlayerSpawner.instance.player.transform.rotation;
+            avatar.GetComponent<Animator>().runtimeAnimatorController = animatorController;
+            //playerMovementScript = PlayerSpawner.instance.player.GetComponent<PlayerMovement>();
+            playerMovementScript.animator = avatar.GetComponent<Animator>();
+            playerMovementScript.avatar = avatar.transform;
+            playerMovementScript.enabled = true;
+            //Launcher.instance.SetNickname(avatar.name);
+            Debug.Log(avatar.transform.position);
+            //Launcher.instance.mainMenuScreen.SetActive(true);
         }
 
         public void OnCreateAvatar()
         {
             canvas.SetActive(false);
+            //Launcher.instance.avatarLoaderScreen.SetActive(false);
 #if !UNITY_EDITOR && UNITY_WEBGL
         WebInterface.SetIFrameVisibility(true);
 #endif

@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.atteneder.gltfast": "https://github.com/atteneder/glTFast.git#v5.0.0",
-    "com.readyplayerme.avatarloader": "https://github.com/readyplayerme/rpm-unity-sdk-avatar-loader.git",
-    "com.readyplayerme.core": "https://github.com/readyplayerme/rpm-unity-sdk-core.git",
+    "com.readyplayerme.core": "https://github.com/readyplayerme/rpm-unity-sdk-core.git#v3.2.0",
     "com.readyplayerme.webview": "https://github.com/readyplayerme/rpm-unity-sdk-webview.git",
+    "com.unity.burst": "1.8.8",
     "com.unity.cinemachine": "2.9.7",
     "com.unity.collab-proxy": "2.0.5",
     "com.unity.feature.development": "1.0.1",
