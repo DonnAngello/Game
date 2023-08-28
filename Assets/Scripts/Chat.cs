@@ -24,6 +24,6 @@ public class Chat : MonoBehaviour
     {
         GameObject M = Instantiate(Message, Vector3.zero, Quaternion.identity, Content.transform);
         M.GetComponent<Message>().MyMessage.text = RecieveMessage;
-        Destroy(M, 10.0f);
+        //Destroy(M, 10.0f);
     }    
 }

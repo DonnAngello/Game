@@ -286,6 +286,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
     }
 
+
+    public void BackToMainMenu()
+    {
+        CloseMenus();
+        menuButtons.SetActive(true);
+    }
     public void QuickJoin()
     {
         RoomOptions options = new RoomOptions();

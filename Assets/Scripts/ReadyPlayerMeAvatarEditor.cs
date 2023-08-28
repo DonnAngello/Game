@@ -3,10 +3,12 @@ using UnityEngine.UI;
 using ReadyPlayerMe.Loader;
 using ReadyPlayerMe.Core;
 using ReadyPlayerMe.Core.Data;
+using Photon.Pun;
+using Photon.Realtime;
 
 namespace Game.AvatarEditor
 {
-    public class ReadyPlayerMeAvatar : MonoBehaviour
+    public class ReadyPlayerMeAvatar : MonoBehaviourPunCallbacks
     {
         private const string TAG = nameof(ReadyPlayerMeAvatar);
         private string avatarUrl = "";
@@ -40,11 +42,27 @@ namespace Game.AvatarEditor
 
         public void OnWebViewAvatarGenerated(string generatedUrl)
         {
+            /*
             var avatarLoader = new AvatarObjectLoader();
             avatarUrl = generatedUrl;
             avatarLoader.OnCompleted += OnAvatarLoadCompleted;
             avatarLoader.OnFailed += OnAvatarLoadFailed;
             avatarLoader.LoadAvatar(avatarUrl);
+            */
+            avatarUrl = generatedUrl;
+            Debug.Log(avatarUrl);
+            Debug.Log(photonView);
+            photonView.RPC("SetPlayer", RpcTarget.AllBuffered, avatarUrl);
+            //GetComponent<PhotonView>().RPC("SetPlayer", RpcTarget.All, avatarUrl);
+        }
+
+        [PunRPC]
+        private void SetPlayer(string incomingUrl)
+        {
+            var avatarLoader = new AvatarObjectLoader();
+            avatarLoader.OnCompleted += OnAvatarLoadCompleted;
+            avatarLoader.OnFailed += OnAvatarLoadFailed;
+            avatarLoader.LoadAvatar(incomingUrl);
         }
 
         private void OnAvatarLoadFailed(object sender, FailureEventArgs args)

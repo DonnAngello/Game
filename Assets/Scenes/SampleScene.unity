@@ -1188,7 +1188,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46183854}
-  m_LocalRotation: {x: -0.000020427062, y: 0.87948006, z: -0.47593582, w: -0.000037747097}
+  m_LocalRotation: {x: -0.000020455678, y: 0.87948006, z: -0.4759358, w: -0.00003779998}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1917,7 +1917,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -32, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &101704722
@@ -13810,6 +13810,7 @@ GameObject:
   m_Component:
   - component: {fileID: 782628377}
   - component: {fileID: 782628376}
+  - component: {fileID: 782628378}
   m_Layer: 0
   m_Name: WebAvatarLoader
   m_TagString: Untagged
@@ -13849,6 +13850,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &782628378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782628375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &782831655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27331,7 +27354,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1568718734}
-  - component: {fileID: 1568718736}
   - component: {fileID: 1568718735}
   m_Layer: 0
   m_Name: Spawn Manager
@@ -27374,19 +27396,6 @@ MonoBehaviour:
   - {fileID: 108752125}
   - {fileID: 44845849}
   - {fileID: 1799155941}
---- !u!114 &1568718736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1568718733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f735c08b2af93184f9872cad87565aca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPoints: []
 --- !u!1001 &1576873387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29036,7 +29045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 339.5, y: -319.34}
+  m_AnchoredPosition: {x: 914, y: -319.34}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1634475144
@@ -30720,39 +30729,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5301098923370098053, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
       propertyPath: sceneViewId
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5301098923370098053, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
-      propertyPath: ObservedComponents.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6683493482035847758, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
-      propertyPath: runAction
-      value: 
-      objectReference: {fileID: 2674991227110624821, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-    - target: {fileID: 6683493482035847758, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
-      propertyPath: backAction
-      value: 
-      objectReference: {fileID: -8556144340067389269, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
     - target: {fileID: 6683493482035847758, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
       propertyPath: canvasChat
       value: 
       objectReference: {fileID: 25221538}
     - target: {fileID: 6683493482035847758, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
-      propertyPath: jumpAction
-      value: 
-      objectReference: {fileID: 4893822157513374627, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-    - target: {fileID: 6683493482035847758, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
       propertyPath: relativeCamera
       value: 
       objectReference: {fileID: 963194228}
-    - target: {fileID: 6683493482035847758, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
-      propertyPath: toggleConsoleAction
-      value: 
-      objectReference: {fileID: 2361926758943954269, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-    m_RemovedComponents:
-    - {fileID: -8639286059914937510, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
-    - {fileID: 5301098923370098053, guid: e9a3e50edd1feba49a8f54ef98c4b0f2, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

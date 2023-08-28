@@ -36,7 +36,7 @@ Transform:
   - {fileID: 8964224619920204997}
   - {fileID: 1639689298123824505}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &838749399323636285
 CharacterController:
@@ -79,8 +79,11 @@ MonoBehaviour:
   controller: {fileID: 838749399323636285}
   animator: {fileID: 1939380635457235029}
   moveAction: {fileID: -1680190386980627800, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  runAction: {fileID: 1763519457029586845, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  jumpAction: {fileID: 4879382080786935858, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  runAction: {fileID: 2674991227110624821, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  jumpAction: {fileID: 4893822157513374627, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  toggleConsoleAction: {fileID: 2361926758943954269, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  backAction: {fileID: -8556144340067389269, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  canvasChat: {fileID: 0}
   relativeCamera: {fileID: 0}
   avatar: {fileID: 8964224619920204997}
   MoveSpeed: 3
