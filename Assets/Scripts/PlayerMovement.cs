@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private CharacterController controller;
+
     public Animator animator;
 
     [SerializeField]
@@ -20,15 +21,16 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private InputActionReference runAction;
     [SerializeField]
     private InputActionReference jumpAction;
+    /*
     [SerializeField]
     private InputActionReference toggleConsoleAction;
     [SerializeField]
     private InputActionReference backAction;
-
+    
     [SerializeField]
     private GameObject canvasChat;
-
-    [SerializeField]
+    */
+    //[SerializeField]
     private Transform relativeCamera;
 
     public Transform avatar;
@@ -70,15 +72,16 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        //relativeCamera = Camera.main.transform;
+        relativeCamera = Camera.main.transform;
+        Debug.Log(relativeCamera.position);
     }
     public override void OnEnable()
     {
         moveAction.action.Enable();
         runAction.action.Enable();
         jumpAction.action.Enable();
-        toggleConsoleAction.action.Enable();
-        backAction.action.Enable();
+        //toggleConsoleAction.action.Enable();
+        //backAction.action.Enable();
     }
 
     public override void OnDisable()
@@ -86,12 +89,14 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         moveAction.action.Disable();
         runAction.action.Disable();
         jumpAction.action.Disable();
-        toggleConsoleAction.action.Disable();
-        backAction.action.Disable();
+        //toggleConsoleAction.action.Disable();
+        //backAction.action.Disable();
     }
 
     private void Update()
     {
+        if (photonView.IsMine)
+        {
             if (runAction.action.IsPressed())
             {
                 speed = SprintSpeed;
@@ -122,7 +127,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             {
                 avatar.forward = moveDirection;
             }
-
+            /*
             if (toggleConsoleAction.action.IsPressed())
             {
                 moveAction.action.Disable();
@@ -138,6 +143,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
                 jumpAction.action.Enable();
                 canvasChat.SetActive(false);
             }
+            */
+        }
     }
 
     private void JumpAndGravity()

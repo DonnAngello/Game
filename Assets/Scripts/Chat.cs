@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class Chat : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class Chat : MonoBehaviour
     public GameObject Message;
     public GameObject Content;
 
-    
     public void SendMessage()
     {
         GetComponent<PhotonView>().RPC("GetMessage", RpcTarget.All,(PhotonNetwork.NickName + " : " + inputField.text));

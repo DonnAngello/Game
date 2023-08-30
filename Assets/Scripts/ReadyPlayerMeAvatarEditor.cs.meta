@@ -3,7 +3,12 @@ guid: dea758b6c59416641b9d172018f6617d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - canvas: {instanceID: 0}
+  - playerParent: {instanceID: 0}
+  - animatorController: {fileID: 9100000, guid: a8ca961bd6f85414aa87f8552864a431, type: 2}
+  - playerMovementScript: {instanceID: 0}
+  - avatar: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
