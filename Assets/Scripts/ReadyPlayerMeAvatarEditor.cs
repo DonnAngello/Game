@@ -10,6 +10,13 @@ namespace Game.AvatarEditor
 {
     public class ReadyPlayerMeAvatar : MonoBehaviourPunCallbacks
     {
+        /*
+        public static ReadyPlayerMeAvatar instance;
+        private void Awake()
+        {
+            instance = this;
+        }
+        */
         private const string TAG = nameof(ReadyPlayerMeAvatar);
         private string avatarUrl = "";
 
@@ -45,6 +52,11 @@ namespace Game.AvatarEditor
                 }
             }
             */
+        }
+
+        public void SetPlayerParent(Transform transform)
+        {
+            playerParent = transform;
         }
 
 
@@ -93,9 +105,10 @@ namespace Game.AvatarEditor
             avatar.transform.SetParent(PlayerSpawner.instance.player.transform);
             avatar.transform.localPosition = new Vector3(0, -1, 0);
             //avatar.transform.rotation = playerParent.rotation;
-            avatar.transform.rotation = PlayerSpawner.instance.player.transform.rotation;
+            avatar.transform.rotation = PlayerSpawner.instance.player.transform.rotation; 
             avatar.GetComponent<Animator>().runtimeAnimatorController = animatorController;
-            playerMovementScript = PlayerSpawner.instance.player.GetComponent<PlayerMovement>();
+            playerMovementScript = PlayerSpawner.instance.player.GetComponent<PlayerMovement>(); 
+            //playerMovementScript = playerParent.GetComponent<PlayerMovement>();
             playerMovementScript.animator = avatar.GetComponent<Animator>();
             playerMovementScript.avatar = avatar.transform;
             playerMovementScript.enabled = true;

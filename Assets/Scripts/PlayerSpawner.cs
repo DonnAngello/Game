@@ -1,3 +1,4 @@
+using Game.AvatarEditor;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,6 +45,8 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
 
         playerFollowCam = PhotonNetwork.Instantiate(cameraPrefab.name, new Vector3(0.0f, 9.3f, 4.6f), Quaternion.identity, 0);
         CameraProperties.instance.SetParameters(player.transform);
+
+        //ReadyPlayerMeAvatar.instance.SetPlayerParent(player.transform);
         
     }
 
