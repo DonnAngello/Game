@@ -10,13 +10,13 @@ namespace Game.AvatarEditor
 {
     public class ReadyPlayerMeAvatar : MonoBehaviourPunCallbacks
     {
-        /*
+        
         public static ReadyPlayerMeAvatar instance;
         private void Awake()
         {
             instance = this;
         }
-        */
+        
         private const string TAG = nameof(ReadyPlayerMeAvatar);
         private string avatarUrl = "";
 
@@ -62,15 +62,15 @@ namespace Game.AvatarEditor
 
         public void OnWebViewAvatarGenerated(string generatedUrl)
         {
-            /*
             var avatarLoader = new AvatarObjectLoader();
             avatarUrl = generatedUrl;
             avatarLoader.OnCompleted += OnAvatarLoadCompleted;
             avatarLoader.OnFailed += OnAvatarLoadFailed;
             avatarLoader.LoadAvatar(avatarUrl);
-            */
-            avatarUrl = generatedUrl;
-            GetComponent<PhotonView>().RPC("SetPlayer", RpcTarget.AllBuffered, avatarUrl);
+
+            //avatarUrl = generatedUrl;
+            //GetComponent<PhotonView>().RPC("SetPlayer", RpcTarget.AllBuffered, avatarUrl);
+
         }
 
         [PunRPC]
@@ -81,6 +81,7 @@ namespace Game.AvatarEditor
             avatarLoader.OnFailed += OnAvatarLoadFailed;
             avatarLoader.LoadAvatar(incomingUrl);
         }
+        
 
         private void OnAvatarLoadFailed(object sender, FailureEventArgs args)
         {
@@ -101,6 +102,7 @@ namespace Game.AvatarEditor
 
             if (avatar) Destroy(avatar);
             avatar = args.Avatar;
+            //avatar = PhotonNetwork.Instantiate(args.Avatar.name, new Vector3(0.0f, 9.3f, 4.6f), Quaternion.identity, 0);
             //avatar.transform.SetParent(playerParent);
             avatar.transform.SetParent(PlayerSpawner.instance.player.transform);
             avatar.transform.localPosition = new Vector3(0, -1, 0);

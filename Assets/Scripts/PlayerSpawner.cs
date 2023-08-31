@@ -36,14 +36,15 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
 
         Debug.Log(spawnPoint.position);
 
+        //player = Instantiate(playerPrefab, spawnPoint.position, spawnPoint.rotation);
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
 
         if (player == null)
         {
             Debug.LogError("PlayerMovement script is null.");
         }
-
-        playerFollowCam = PhotonNetwork.Instantiate(cameraPrefab.name, new Vector3(0.0f, 9.3f, 4.6f), Quaternion.identity, 0);
+        
+        //playerFollowCam = PhotonNetwork.Instantiate(cameraPrefab.name, new Vector3(0.0f, 9.3f, 4.6f), Quaternion.identity, 0);
         CameraProperties.instance.SetParameters(player.transform);
 
         //ReadyPlayerMeAvatar.instance.SetPlayerParent(player.transform);
