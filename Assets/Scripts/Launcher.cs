@@ -126,6 +126,9 @@ public class Launcher : MonoBehaviourPunCallbacks
             CloseMenus();
             loadingText.text = "Creating Room...";
             loadingScreen.SetActive(true);
+
+
+            options.PlayerTtl = 180000000;
         }
     }
 

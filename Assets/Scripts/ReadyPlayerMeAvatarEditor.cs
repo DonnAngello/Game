@@ -38,16 +38,6 @@ namespace Game.AvatarEditor
         CoreSettings partner = CoreSettingsHandler.CoreSettings;        
         WebInterface.SetupRpmFrame(partner.Subdomain);
 #endif
-            /*
-            if(PlayerSpawner.instance.player != null)
-            {
-                playerMovementScript = PlayerSpawner.instance.player.GetComponent<PlayerMovement>();
-                if(playerMovementScript != null )
-                {
-                    Debug.Log(playerMovementScript);
-                }
-            }
-            */
         }
 
 
@@ -66,6 +56,7 @@ namespace Game.AvatarEditor
 
         public void LoadAvatarInsidePlayer(GameObject player, string incomingUrl)
         {
+            Debug.Log("Ucitavam");
             playersAvatarUrls[incomingUrl] = player;
             var avatarLoader = new AvatarObjectLoader();
             avatarLoader.OnCompleted += OnAvatarLoadCompleted;
@@ -84,7 +75,11 @@ namespace Game.AvatarEditor
         {
             GameObject player = playersAvatarUrls[args.Url];
             if (player is null)
+            {
+                Debug.Log("Unsucessfull");
                 return;
+            }
+                
 
             if (avatar) Destroy(avatar);
             avatar = args.Avatar;
