@@ -2,8 +2,9 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.AvatarEditor;
 
-public class PlayerSpawner : MonoBehaviourPunCallbacks
+public class PlayerSpawner : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
 {
     public static PlayerSpawner instance;
 
@@ -12,6 +13,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         instance = this;
     }
 
+    [SerializeField] private ReadyPlayerMeAvatar avatarLoader;
     public GameObject playerPrefab;
     public GameObject cameraPrefab;
 
@@ -19,23 +21,14 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
     public GameObject player;
     public GameObject playerFollowCam;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (PhotonNetwork.IsConnected)
-        {
-            SpawnPlayer();
-            Debug.Log("CaLLED");
-        }
-    }
 
-    public void SpawnPlayer()
+    public void SpawnPlayer(string avatarUrl)
     {
         Transform spawnPoint = SpawnManager.instance.GetSpawnPoint();
 
         Debug.Log(spawnPoint.position);
 
-        player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
+        player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation, 0, new object[] { avatarUrl });
 
         if (player == null)
         {
@@ -47,9 +40,10 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        
+        object[] instantiationData = info.photonView.InstantiationData;
+        var player = info.photonView.gameObject;
+        avatarLoader.LoadAvatarInsidePlayer(player, (string) instantiationData[0]);
     }
 }
