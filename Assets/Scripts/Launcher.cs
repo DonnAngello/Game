@@ -120,15 +120,14 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             RoomOptions options = new RoomOptions();
             options.MaxPlayers = 8;
+            options.PlayerTtl = 1800000;
+            options.EmptyRoomTtl = 300000;
 
             PhotonNetwork.CreateRoom(roomNameInput.text, options);
 
             CloseMenus();
             loadingText.text = "Creating Room...";
             loadingScreen.SetActive(true);
-
-
-            options.PlayerTtl = 180000000;
         }
     }
 
