@@ -81,7 +81,7 @@ namespace Game.AvatarEditor
             }
                 
 
-            if (avatar) Destroy(avatar);
+            //if (avatar) Destroy(avatar);
             avatar = args.Avatar;
             //avatar.transform.SetParent(playerParent);
             avatar.transform.SetParent(player.transform);
