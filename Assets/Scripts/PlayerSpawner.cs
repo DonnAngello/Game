@@ -2,8 +2,9 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.AvatarEditor;
 
-public class PlayerSpawner : MonoBehaviourPunCallbacks
+public class PlayerSpawner : MonoBehaviourPunCallbacks//, IPunInstantiateMagicCallback
 {
     public static PlayerSpawner instance;
 
@@ -12,6 +13,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         instance = this;
     }
 
+    [SerializeField] private ReadyPlayerMeAvatar avatarLoader;
     public GameObject playerPrefab;
     public GameObject cameraPrefab;
 
@@ -19,37 +21,31 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
     public GameObject player;
     public GameObject playerFollowCam;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (PhotonNetwork.IsConnected)
-        {
-            SpawnPlayer();
-            Debug.Log("CaLLED");
-        }
-    }
 
-    public void SpawnPlayer()
+    public void SpawnPlayer(string avatarUrl)
     {
         Transform spawnPoint = SpawnManager.instance.GetSpawnPoint();
 
         Debug.Log(spawnPoint.position);
 
-        player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
+        player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation, 0, new object[] { avatarUrl });
 
         if (player == null)
         {
             Debug.LogError("PlayerMovement script is null.");
         }
 
-        playerFollowCam = PhotonNetwork.Instantiate(cameraPrefab.name, new Vector3(0.0f, 9.3f, 4.6f), Quaternion.identity, 0);
+        //playerFollowCam = PhotonNetwork.Instantiate(cameraPrefab.name, new Vector3(0.0f, 9.3f, 4.6f), Quaternion.identity, 0);
         CameraProperties.instance.SetParameters(player.transform);
         
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void InstantiateAvatar(PhotonMessageInfo info)
     {
-        
+        Debug.Log("pokrenuto");
+        object[] instantiationData = info.photonView.InstantiationData;
+        var player = info.photonView.gameObject;
+        Debug.Log((string)instantiationData[0] + "ovo instaciramo");
+        avatarLoader.LoadAvatarInsidePlayer(player, (string) instantiationData[0]);
     }
 }

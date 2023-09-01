@@ -5,6 +5,8 @@ using ReadyPlayerMe.Core;
 using ReadyPlayerMe.Core.Data;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Game.AvatarEditor
 {
@@ -28,23 +30,14 @@ namespace Game.AvatarEditor
         [Header("Outputs")]
         public GameObject avatar;
 
+        private Dictionary<string, GameObject> playersAvatarUrls = new Dictionary<string, GameObject>();
+
         private void Start()
         {
 #if !UNITY_EDITOR && UNITY_WEBGL
-        CoreSettings partner = CoreSettingsHandler.CoreSettings;
-        
+        CoreSettings partner = CoreSettingsHandler.CoreSettings;        
         WebInterface.SetupRpmFrame(partner.Subdomain);
 #endif
-            /*
-            if(PlayerSpawner.instance.player != null)
-            {
-                playerMovementScript = PlayerSpawner.instance.player.GetComponent<PlayerMovement>();
-                if(playerMovementScript != null )
-                {
-                    Debug.Log(playerMovementScript);
-                }
-            }
-            */
         }
 
 
@@ -58,17 +51,19 @@ namespace Game.AvatarEditor
             avatarLoader.LoadAvatar(avatarUrl);
             */
             avatarUrl = generatedUrl;
-            GetComponent<PhotonView>().RPC("SetPlayer", RpcTarget.AllBuffered, avatarUrl);
+            PlayerSpawner.instance.SpawnPlayer(avatarUrl);
         }
 
-        [PunRPC]
-        private void SetPlayer(string incomingUrl)
+        public void LoadAvatarInsidePlayer(GameObject player, string incomingUrl)
         {
+            Debug.Log("Ucitavam");
+            playersAvatarUrls[incomingUrl] = player;
             var avatarLoader = new AvatarObjectLoader();
             avatarLoader.OnCompleted += OnAvatarLoadCompleted;
             avatarLoader.OnFailed += OnAvatarLoadFailed;
             avatarLoader.LoadAvatar(incomingUrl);
         }
+             
 
         private void OnAvatarLoadFailed(object sender, FailureEventArgs args)
         {
@@ -78,24 +73,23 @@ namespace Game.AvatarEditor
 
         private void OnAvatarLoadCompleted(object sender, CompletionEventArgs args)
         {
-            /*
-            if (avatar) Destroy(avatar);
-            avatar = args.Avatar;
-            if (args.Metadata.BodyType == BodyType.HalfBody)
+            GameObject player = playersAvatarUrls[args.Url];
+            if (player is null)
             {
-                avatar.transform.position = new Vector3(0, 1, 0);
+                Debug.Log("Unsucessfull");
+                return;
             }
-            */
+                
 
             if (avatar) Destroy(avatar);
             avatar = args.Avatar;
             //avatar.transform.SetParent(playerParent);
-            avatar.transform.SetParent(PlayerSpawner.instance.player.transform);
+            avatar.transform.SetParent(player.transform);
             avatar.transform.localPosition = new Vector3(0, -1, 0);
             //avatar.transform.rotation = playerParent.rotation;
-            avatar.transform.rotation = PlayerSpawner.instance.player.transform.rotation;
+            avatar.transform.rotation = player.transform.rotation;
             avatar.GetComponent<Animator>().runtimeAnimatorController = animatorController;
-            playerMovementScript = PlayerSpawner.instance.player.GetComponent<PlayerMovement>();
+            playerMovementScript = player.GetComponent<PlayerMovement>();
             playerMovementScript.animator = avatar.GetComponent<Animator>();
             playerMovementScript.avatar = avatar.transform;
             playerMovementScript.enabled = true;
