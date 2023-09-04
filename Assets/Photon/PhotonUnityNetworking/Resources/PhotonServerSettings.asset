@@ -38,6 +38,9 @@ MonoBehaviour:
   - DestroyRpc
   - GetMessage
   - SetPlayer
+  - Walk
+  - SetMoveDirection
+  - AnimateJump
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

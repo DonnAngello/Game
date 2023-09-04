@@ -5818,8 +5818,6 @@ GameObject:
   - component: {fileID: 358078837}
   - component: {fileID: 358078836}
   - component: {fileID: 358078835}
-  - component: {fileID: 358078839}
-  - component: {fileID: 358078840}
   m_Layer: 0
   m_Name: Canvas Chat
   m_TagString: Untagged
@@ -5913,43 +5911,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &358078839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358078832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b57c89aac2b60e6499e0c55a2ed69dad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputField: {fileID: 1122796324}
-  Message: {fileID: 443300040823965651, guid: 6ac58ce33029baf468893cc2416dba3c, type: 3}
-  Content: {fileID: 632710264}
---- !u!114 &358078840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 358078832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1001 &359622286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13224,7 +13185,7 @@ MonoBehaviour:
   canvas: {fileID: 1504367524}
   playerParent: {fileID: 0}
   animatorController: {fileID: 9100000, guid: a8ca961bd6f85414aa87f8552864a431, type: 2}
-  avatar: {fileID: 0}
+  playerMovementScript: {fileID: 0}
 --- !u!4 &782628377
 Transform:
   m_ObjectHideFlags: 0
@@ -17385,7 +17346,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 358078839}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Chat, Assembly-CSharp
         m_MethodName: SendMessage
         m_Mode: 1

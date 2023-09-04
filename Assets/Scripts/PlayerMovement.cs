@@ -118,14 +118,16 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             Vector3 allAxesMove = (moveDirection * Time.deltaTime + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
             controller.Move(allAxesMove);
 
-            animator.SetFloat("Magnitude", moveDirection.magnitude);
+           
+            photonView.RPC("Walk", RpcTarget.All, moveDirection.magnitude);
+
 
             JumpAndGravity();
 
 
             if (moveDirection != Vector3.zero)
             {
-                avatar.forward = moveDirection;
+                photonView.RPC("SetMoveDirection", RpcTarget.All, moveDirection);
             }
             /*
             if (toggleConsoleAction.action.IsPressed())
@@ -154,7 +156,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             // reset the fall timeout timer
             _fallTimeoutDelta = FallTimeout;
 
-            animator.SetBool("animJump", false);
+            photonView.RPC("AnimateJump", RpcTarget.All, false);
 
             // stop our velocity dropping infinitely when grounded
             if (_verticalVelocity < 0.0f)
@@ -168,7 +170,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
                 // the square root of H * -2 * G = how much velocity needed to reach desired height
                 _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
 
-                animator.SetBool("animJump", true);
+                //animator.SetBool("animJump", true);
+                photonView.RPC("AnimateJump", RpcTarget.All, true);
             }
 
             // jump timeout
@@ -193,6 +196,34 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if (_verticalVelocity < _terminalVelocity)
         {
             _verticalVelocity += Gravity * Time.deltaTime;
+        }
+    }
+
+    [PunRPC]
+    void Walk(float walkSpeed)
+    {
+        if(animator != null)
+        {
+            animator.SetFloat("Magnitude", walkSpeed);
+        }
+        
+    }
+
+    [PunRPC]
+    void SetMoveDirection(Vector3 direction)
+    {
+        if(animator != null)
+        {
+            avatar.forward = direction;
+        }
+    }
+
+    [PunRPC]
+    void AnimateJump(bool jump)
+    {
+        if(animator != null)
+        {
+            animator.SetBool("animJump", jump);
         }
     }
 }
