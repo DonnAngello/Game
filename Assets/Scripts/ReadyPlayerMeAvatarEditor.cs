@@ -25,12 +25,16 @@ namespace Game.AvatarEditor
         private RuntimeAnimatorController animatorController;
 
         //[SerializeField]
-        private PlayerMovement playerMovementScript;
+        public PlayerMovement playerMovementScript;
 
         [Header("Outputs")]
-        public GameObject avatar;
+        //public GameObject avatar;
 
         private Dictionary<string, GameObject> playersAvatarUrls = new Dictionary<string, GameObject>();
+
+        public Dictionary<string, GameObject> playerAvatars = new Dictionary<string, GameObject>();
+
+        private string currAvatarUrl;
 
         private void Start()
         {
@@ -57,6 +61,7 @@ namespace Game.AvatarEditor
         public void LoadAvatarInsidePlayer(GameObject player, string incomingUrl)
         {
             Debug.Log("Ucitavam");
+            currAvatarUrl = incomingUrl;
             playersAvatarUrls[incomingUrl] = player;
             var avatarLoader = new AvatarObjectLoader();
             avatarLoader.OnCompleted += OnAvatarLoadCompleted;
@@ -82,19 +87,24 @@ namespace Game.AvatarEditor
                 
 
             //if (avatar) Destroy(avatar);
-            avatar = args.Avatar;
+            //avatar = args.Avatar;
+            playerAvatars[currAvatarUrl] = args.Avatar;
             //avatar.transform.SetParent(playerParent);
-            avatar.transform.SetParent(player.transform);
-            avatar.transform.localPosition = new Vector3(0, -1, 0);
+            //avatar.transform.SetParent(player.transform);
+            //avatar.transform.localPosition = new Vector3(0, -1, 0);
+            playerAvatars[currAvatarUrl].transform.SetParent(player.transform);
+            playerAvatars[currAvatarUrl].transform.localPosition = new Vector3(0, -1, 0);
             //avatar.transform.rotation = playerParent.rotation;
-            avatar.transform.rotation = player.transform.rotation;
-            avatar.GetComponent<Animator>().runtimeAnimatorController = animatorController;
+            //avatar.transform.rotation = player.transform.rotation;
+            //avatar.GetComponent<Animator>().runtimeAnimatorController = animatorController;
+            playerAvatars[currAvatarUrl].transform.rotation = player.transform.rotation;
+            playerAvatars[currAvatarUrl].GetComponent<Animator>().runtimeAnimatorController = animatorController;
             playerMovementScript = player.GetComponent<PlayerMovement>();
-            playerMovementScript.animator = avatar.GetComponent<Animator>();
-            playerMovementScript.avatar = avatar.transform;
+            playerMovementScript.animator = playerAvatars[currAvatarUrl].GetComponent<Animator>();
+            playerMovementScript.avatar = playerAvatars[currAvatarUrl].transform;
             playerMovementScript.enabled = true;
             //Launcher.instance.SetNickname(avatar.name);
-            Debug.Log(avatar.transform.position);
+            Debug.Log(playerAvatars[currAvatarUrl].transform.position);
         }
 
         public void OnCreateAvatar()

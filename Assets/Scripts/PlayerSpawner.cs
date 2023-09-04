@@ -36,6 +36,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks//, IPunInstantiateMagicCa
         }
 
         //playerFollowCam = PhotonNetwork.Instantiate(cameraPrefab.name, new Vector3(0.0f, 9.3f, 4.6f), Quaternion.identity, 0);
+        playerFollowCam = Instantiate(cameraPrefab, cameraPrefab.transform.position, Quaternion.identity);
         CameraProperties.instance.SetParameters(player.transform);
         
     }
@@ -45,7 +46,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks//, IPunInstantiateMagicCa
         Debug.Log("pokrenuto");
         object[] instantiationData = info.photonView.InstantiationData;
         var player = info.photonView.gameObject;
-        Debug.Log((string)instantiationData[0] + "ovo instaciramo");
+        Debug.Log((string)instantiationData[0] + " instaciramo");
         avatarLoader.LoadAvatarInsidePlayer(player, (string) instantiationData[0]);
     }
 }

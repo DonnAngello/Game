@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAvatarCreator : MonoBehaviour, IPunInstantiateMagicCallback
+public class PlayerAvatarCreator : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
