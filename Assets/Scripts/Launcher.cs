@@ -122,6 +122,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             options.MaxPlayers = 8;
             options.PlayerTtl = 1800000;
             options.EmptyRoomTtl = 300000;
+            options.CleanupCacheOnLeave = true;
 
             PhotonNetwork.CreateRoom(roomNameInput.text, options);
 

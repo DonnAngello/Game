@@ -54,6 +54,7 @@ public class Reconnection :MonoBehaviourPunCallbacks, IConnectionCallbacks
             case DisconnectCause.ClientTimeout:
             case DisconnectCause.DisconnectByServerLogic:
             case DisconnectCause.DisconnectByServerReasonUnknown:
+            case DisconnectCause.ExceptionOnConnect:
                 return true;
         }
         return false;
@@ -81,7 +82,6 @@ public class Reconnection :MonoBehaviourPunCallbacks, IConnectionCallbacks
         {
             Debug.Log("ReconnectAndRejoin Succes.");
             reconnecting = true;
-            shouldReconnect = false;
         }
     }
 
