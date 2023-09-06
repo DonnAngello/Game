@@ -62,6 +62,7 @@ namespace Game.AvatarEditor
         {
             Debug.Log("Ucitavam");
             currAvatarUrl = incomingUrl;
+ 
             playersAvatarUrls[incomingUrl] = player;
             var avatarLoader = new AvatarObjectLoader();
             avatarLoader.OnCompleted += OnAvatarLoadCompleted;
@@ -84,7 +85,15 @@ namespace Game.AvatarEditor
                 Debug.Log("Unsucessfull");
                 return;
             }
-                
+
+            if (player.GetComponent<PhotonView>().IsMine)
+            {
+                CameraProperties.instance.SetParameters(player.transform);
+            }
+            else
+            {
+                Debug.Log("Neko se reinstancira");
+            }
 
             //if (avatar) Destroy(avatar);
             //avatar = args.Avatar;

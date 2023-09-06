@@ -16,14 +16,17 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks//, IPunInstantiateMagicCa
     [SerializeField] private ReadyPlayerMeAvatar avatarLoader;
     public GameObject playerPrefab;
     public GameObject cameraPrefab;
+    public GameObject reconnectionPrefab;
 
     [Header("Outputs")]
     public GameObject player;
     public GameObject playerFollowCam;
+    public GameObject reconnector;
 
 
     public void SpawnPlayer(string avatarUrl)
     {
+        Debug.Log("rekonekt pokrenuo ?!");
         Transform spawnPoint = SpawnManager.instance.GetSpawnPoint();
 
         Debug.Log(spawnPoint.position);
@@ -37,8 +40,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks//, IPunInstantiateMagicCa
 
         //playerFollowCam = PhotonNetwork.Instantiate(cameraPrefab.name, new Vector3(0.0f, 9.3f, 4.6f), Quaternion.identity, 0);
         playerFollowCam = Instantiate(cameraPrefab, cameraPrefab.transform.position, Quaternion.identity);
-        CameraProperties.instance.SetParameters(player.transform);
-        
+        reconnector = Instantiate(reconnectionPrefab, reconnectionPrefab.transform.position, Quaternion.identity);
     }
     
     public void InstantiateAvatar(PhotonMessageInfo info)
@@ -49,4 +51,5 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks//, IPunInstantiateMagicCa
         Debug.Log((string)instantiationData[0] + " instaciramo");
         avatarLoader.LoadAvatarInsidePlayer(player, (string) instantiationData[0]);
     }
+
 }
