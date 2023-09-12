@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     private InputActionReference runAction;
     [SerializeField]
     private InputActionReference jumpAction;
+    [SerializeField]
+    private InputActionReference kickAction;
     /*
     [SerializeField]
     private InputActionReference toggleConsoleAction;
@@ -80,6 +82,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         moveAction.action.Enable();
         runAction.action.Enable();
         jumpAction.action.Enable();
+        kickAction.action.Enable();
         //toggleConsoleAction.action.Enable();
         //backAction.action.Enable();
     }
@@ -89,6 +92,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         moveAction.action.Disable();
         runAction.action.Disable();
         jumpAction.action.Disable();
+        kickAction.action.Disable();
         //toggleConsoleAction.action.Disable();
         //backAction.action.Disable();
     }
@@ -146,6 +150,11 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
                 canvasChat.SetActive(false);
             }
             */
+
+            if (kickAction.action.IsPressed())
+            {
+                photonView.RPC("AnimateKick", RpcTarget.All);
+            }
         }
     }
 
@@ -224,6 +233,15 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         if(animator != null)
         {
             animator.SetBool("animJump", jump);
+        }
+    }
+
+    [PunRPC]
+    void AnimateKick()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("animKick");
         }
     }
 }
