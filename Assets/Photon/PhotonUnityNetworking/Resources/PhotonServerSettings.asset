@@ -16,10 +16,10 @@ MonoBehaviour:
     AppIdRealtime: 315de067-483c-4201-809e-4f64f190838b
     AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: ef920ee7-7a39-44e0-abd3-00f9281aa146
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: tr
+    FixedRegion: 
     Server: 
     Port: 0
     ProxyServer: 
@@ -28,20 +28,22 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: ru
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - CantHearYou
+  - ChangeColour
   - ClickRpc
   - DestroyRpc
-  - GetMessage
-  - SetPlayer
-  - Walk
-  - SetMoveDirection
+  - HeresWhy
   - AnimateJump
   - AnimateKick
+  - GetMessage
+  - SetMoveDirection
+  - Walk
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0
