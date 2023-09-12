@@ -21821,8 +21821,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 106e09d6182c4844f9b34f4fd2430ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggleConsoleAction: {fileID: -5962082218693329161, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  backAction: {fileID: -1278857145707332977, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  toggleConsoleAction: {fileID: 509495395087572374, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  backAction: {fileID: -1578881181904783021, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   canvasChat: {fileID: 358078832}
 --- !u!4 &1265282491
 Transform:
