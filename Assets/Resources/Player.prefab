@@ -110,8 +110,9 @@ MonoBehaviour:
   controller: {fileID: 2961791849102483524}
   animator: {fileID: 0}
   moveAction: {fileID: -1680190386980627800, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  runAction: {fileID: 969087189262440651, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  jumpAction: {fileID: -7566060003007315792, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  runAction: {fileID: 2747172355383261393, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  jumpAction: {fileID: -5323103965289736398, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  kickAction: {fileID: 4493316769376797677, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   avatar: {fileID: 0}
   MoveSpeed: 3.2
   JumpHeight: 1.2
